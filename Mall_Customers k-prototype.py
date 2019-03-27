@@ -33,6 +33,8 @@ from   kmodes import kmodes
 from   kmodes import kprototypes
 import matplotlib.pyplot as plt
 
+
+
 #
 #
 #       globals
@@ -110,7 +112,9 @@ data_cats.dtypes
 
 #       kprototypes needs an array
 
-data_cats_matrix = data_cats.as_matrix()
+
+data_cats_matrix = data_cats.values
+
 #
 #       model parameters
 #
@@ -153,7 +157,7 @@ cluster_df = pd.DataFrame(columns=('CustomerID','Gender','Age','Annual Income (k
 #
 #       load arrays back into a dataframe
 #
-for array in zip(data_cats_matrix,clusters,df['CustomerID'].as_matrix()):
+for array in zip(data_cats_matrix,clusters,df['CustomerID'].values):
         cluster_df = cluster_df.append({'CustomerID':array[2],'Gender':array[0][0], 'Age':array[0][1],
                                     'Annual Income (k$)':array[0][2],'Spending Score (1-100)':array[0][3]
                                     ,'cluster_id':array[1]}, ignore_index=True)
@@ -167,10 +171,19 @@ b=cluster_df.where(cluster_df['cluster_id']==2)
 g=cluster_df.where(cluster_df['cluster_id']==3)
 bl=cluster_df.where(cluster_df['cluster_id']==0)
         
-plt.scatter(d['CustomerID'].as_matrix(),d['Annual Income (k$)'].as_matrix(), c='r')   
-plt.scatter(b['CustomerID'].as_matrix(), b['Annual Income (k$)'].as_matrix(), c='b') 
-plt.scatter(g['CustomerID'].as_matrix(), g['Annual Income (k$)'].as_matrix(), c='g')  
-plt.scatter(bl['CustomerID'].as_matrix(), bl['Annual Income (k$)'].as_matrix(), c='black')  
+plt.scatter(r['CustomerID'].values,r['Annual Income (k$)'].values, c='r')
+plt.show()
+
+plt.scatter(b['CustomerID'].values, b['Annual Income (k$)'].values, c='b')
+plt.show()
+
+plt.scatter(g['CustomerID'].values, g['Annual Income (k$)'].values, c='g')
+plt.show()
+
+plt.scatter(bl['CustomerID'].values, bl['Annual Income (k$)'].values, c='black')
+plt.show()
+
+
  
         
 
